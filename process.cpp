@@ -580,7 +580,7 @@ void color_init()
     }
     else
     {
-        qDebug() << "calculated colors" << colorTbl.data[0];
+        //qDebug() << "calculated colors" << colorTbl.data[0];
         int temp[100];
 
         for ( i = 0; i < 1024; i ++)

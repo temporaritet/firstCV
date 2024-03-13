@@ -34,29 +34,29 @@ webcam::~webcam()
 
 void webcam::openStream()
 {
-    /* wait 10ms */
-    msleep(10);
+    /* wait 30ms */
+    msleep(30);
 
     /* open video stream */
     if(fLoad == 0)
     {
         if(camId == 0)
         {
-            strcpy(streamSrc, "woodL.bmp");
+            strcpy(streamSrc, "images/woodL.bmp");
         }
         else
         {
-            strcpy(streamSrc, "woodR.bmp");
+            strcpy(streamSrc, "images/woodR.bmp");
         }
     }
 
     switch (option)
     {
         case 0:
-            captureCam.open(1);
+            captureCam.open("/dev/video1");
             break;
         case 1:
-            captureCam.open(2);
+            captureCam.open("/dev/video2");
             break;
         case 2:
         case 3:

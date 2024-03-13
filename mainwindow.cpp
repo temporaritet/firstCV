@@ -310,7 +310,7 @@ void MainWindow::on_pushButtonStartStop_clicked()
 {
     if(ui->pushButtonStartStop->text() == "Start")
     {
-        tmrTimer->start(100);
+        tmrTimer->start(150);
         ui->pushButtonStartStop->setText("Stop");
     }
     else if(ui->pushButtonStartStop->text() == "Stop")
@@ -332,6 +332,6 @@ void MainWindow::on_pushButton_clicked()
 
     imwrite(fn.toStdString(), matProc);
 
-    tmrTimer->start(100);
+    tmrTimer->start(150);
     ui->pushButtonStartStop->setText("Stop");
 }
