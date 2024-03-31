@@ -11,6 +11,7 @@ using namespace cv;
 /* Create 2 camera objects and initialize camId */
 webcam cam0(0);
 webcam cam1(1);
+Server server;
 
 QDir dir;
 QString path;
@@ -42,16 +43,24 @@ MainWindow::MainWindow(QWidget *parent) :
 
     color_init();
     countbits_init();
+
+    if(!server.isRunning())
+    {
+        server.start();
+    }
 }
 
 MainWindow::~MainWindow()
 {    
     cam0.thClose();
     cam1.thClose();
+    server.thClose();
 
     cam0.wait();
-    cam1.wait();
+    cam1.wait();    
+    server.wait();
 
+    tmrTimer->stop();
     delete tmrTimer;
 }
 
@@ -132,15 +141,12 @@ void MainWindow::SGBMCalc()
 
     DisparityOCV(matRotated0, matRotated1, &matProc, 1);
 
-    colorDisparity(matProc.data, imTest);
+    colorDisparity(matProc.data, matTest.data);
 
     imgOverlap(matRotated0.data, matRotated1.data, matRotated0.data);
 
-    QImage qimageC2( (uchar*)matRotated0.data, matRotated0.cols, matRotated0.rows, matRotated0.step, QImage::Format_Indexed8);
-    QImage qimageC3( (uchar*)imTest, cam0.matIm.cols, cam0.matIm.rows, cam0.matIm.step, QImage::Format_RGB888);
+    ImageShow(matRotated0, matTest);
 
-    ui->label_Im0->setPixmap(QPixmap::fromImage(qimageC2)); // 2-4ms
-    ui->label_Im1->setPixmap(QPixmap::fromImage(qimageC3)); // 2-4ms
 }
 
 void MainWindow::CensusCalc()
@@ -148,34 +154,35 @@ void MainWindow::CensusCalc()
     getCensus(matRotated0.data, matRotated1.data, matProc.data);
     //imshow("Temp Image",imTemp);
 
-    colorDisparity(matProc.data, imTest);
+    colorDisparity(matProc.data, matTest.data);
 
     imgOverlap(matRotated0.data, matRotated1.data, matRotated0.data);
-    //Canny(matProc, matProc, 40, 40, 3, 0);
-    //imshow("Disparity2", matProc);
 
-    QImage qimageC2( (uchar*)matRotated0.data, matRotated0.cols, matRotated0.rows, matRotated0.step, QImage::Format_Indexed8);
-    QImage qimageC3( (uchar*)imTest, cam0.matIm.cols, cam0.matIm.rows, cam0.matIm.step, QImage::Format_RGB888);
-
-    ui->label_Im0->setPixmap(QPixmap::fromImage(qimageC2)); // 2-4ms
-    ui->label_Im1->setPixmap(QPixmap::fromImage(qimageC3)); // 2-4ms
-
+    ImageShow(matRotated0, matTest);
 }
 
 void MainWindow::SADCalc()
 {
     getDisparity(matRotated0.data, matRotated1.data, matProc.data);
-    //imshow("Temp Image",imTemp);
 
-    colorDisparity(matProc.data, imTest);
+    colorDisparity(matProc.data, matTest.data);
 
     imgOverlap(matRotated0.data, matRotated1.data, matRotated0.data);
 
-    QImage qimageC2( (uchar*)matRotated0.data, matRotated0.cols, matRotated0.rows, matRotated0.step, QImage::Format_Indexed8);
-    QImage qimageC3( (uchar*)imTest, cam0.matIm.cols, cam0.matIm.rows, cam0.matIm.step, QImage::Format_RGB888);
+    ImageShow(matRotated0, matTest);
 
-    ui->label_Im0->setPixmap(QPixmap::fromImage(qimageC2)); // 2-4ms
-    ui->label_Im1->setPixmap(QPixmap::fromImage(qimageC3)); // 2-4ms
+}
+
+void MainWindow::ImageShow(Mat imgOrigin, Mat ImgDisparity)
+{
+    cv::resize(imgOrigin, imgOrigin, Size(ui->label_Im0->width(), ui->label_Im0->height()), 0, 0, INTER_CUBIC);
+    cv::resize(ImgDisparity, ImgDisparity, cv::Size(ui->label_Im1->width(), ui->label_Im1->height()), 0, 0, INTER_CUBIC);
+
+    QImage qimageC1( (uchar*)imgOrigin.data, imgOrigin.cols, imgOrigin.rows, imgOrigin.step, QImage::Format_Indexed8);
+    QImage qimageC2( (uchar*)ImgDisparity.data, ImgDisparity.cols, ImgDisparity.rows, ImgDisparity.step, QImage::Format_RGB888);
+
+    ui->label_Im0->setPixmap(QPixmap::fromImage(qimageC1)); // 2-4ms
+    ui->label_Im1->setPixmap(QPixmap::fromImage(qimageC2)); // 2-4ms
 }
 
 void MainWindow::selectOption(webcam *cam, QString textSelect)
@@ -216,13 +223,13 @@ void MainWindow::GetImg()
     {
         cam1.start();
     }
-
     /* Check images are in buffer */
     if(cam0.isReady && cam1.isReady)
     {
         QTime timer;
 
         cam0.matIm.copyTo(matProc);
+        cam0.matIm.copyTo(matTest);
 
         if(ui->CheckBox_Calib->isChecked())
         {
@@ -232,8 +239,7 @@ void MainWindow::GetImg()
         {
             cvtColor(cam0.matIm, matRotated0, COLOR_BGR2GRAY);
             cvtColor(cam1.matIm, matRotated1, COLOR_BGR2GRAY);
-            matRotated0.copyTo(matProc);
-            //matRotated0.copyTo(imTemp);
+            matRotated0.copyTo(matProc);            
 
             Mat M0 = getPerspectiveTransform(src1, src0);
             warpPerspective(matRotated1, matRotated1, M0, matRotated1.size(),INTER_LINEAR, BORDER_CONSTANT,0);
@@ -257,7 +263,11 @@ void MainWindow::GetImg()
                 SADCalc();
             }
 
-            qDebug() << "main process: " << timer.elapsed();
+            memcpy(server.bufferTx, matProc.data, 320*240);
+            //server.bufferTx = matProc.data;
+            server.dataInBuffer = 1;
+
+
         }
 
         cam0.isReady = false;
@@ -292,7 +302,7 @@ void MainWindow::on_pushButtonLoadFiles_clicked()
     strcpy(cam1.streamSrc, fn.toStdString().c_str());
     ui->lineEditRight->setText(cam1.streamSrc);
     cam1.fLoad = true;
-    tmrTimer->start(100);
+    tmrTimer->start(200);
     ui->pushButtonStartStop->setText("Stop");
 }
 
@@ -310,7 +320,7 @@ void MainWindow::on_pushButtonStartStop_clicked()
 {
     if(ui->pushButtonStartStop->text() == "Start")
     {
-        tmrTimer->start(150);
+        tmrTimer->start(200);
         ui->pushButtonStartStop->setText("Stop");
     }
     else if(ui->pushButtonStartStop->text() == "Stop")
@@ -332,6 +342,6 @@ void MainWindow::on_pushButton_clicked()
 
     imwrite(fn.toStdString(), matProc);
 
-    tmrTimer->start(150);
+    tmrTimer->start(200);
     ui->pushButtonStartStop->setText("Stop");
 }

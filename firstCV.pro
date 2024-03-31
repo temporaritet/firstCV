@@ -19,11 +19,13 @@ QMAKE_CXXFLAGS_RELEASE *= -O3
 SOURCES += main.cpp\
         mainwindow.cpp \
     webcam.cpp \
-    process.cpp
+    process.cpp \
+    server.cpp
 
 HEADERS  += mainwindow.h \
     webcam.h \
-    process.h
+    process.h \
+    server.h
 
 FORMS    += mainwindow.ui
 

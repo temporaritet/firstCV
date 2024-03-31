@@ -35,19 +35,12 @@ Point2f dst[] = {Point2f(0.0f, 0.0f),Point2f(320.0f, 0.0f),Point2f(0.0f, 240.0f)
 
 //--------------------------------------------------------------------------------
 
-template <class anyType>
-short abs(short val)
+template <typename anyType>
+anyType abs(anyType val)
 {
-    if(val < 0)
-    {
-        return -val;
-    }
-    else
-    {
-        return val;
-    }
+    return(val < 0)? -val:val;
 }
-template <class countType>
+template <typename countType>
 uint countbits(countType value)
 {
     value = value - ((value >> 1) & 0x55555555);

@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include "webcam.h"
 #include "process.h"
+#include "server.h"
 
 using namespace std;
 namespace Ui {
@@ -22,7 +23,7 @@ public:
 
     QTimer *tmrTimer;
 
-    Mat matProc, matRotated0, matRotated1;
+    Mat matProc, matRotated0, matRotated1, matTest;
 
     QImage qimage0, qimage1;
 
@@ -33,6 +34,7 @@ public slots:
     void SGBMCalc();
     void selectOption(webcam *cam, QString textSelect);
     void GetImg();
+    void ImageShow(Mat imgOrigin, Mat ImgDisparity);
 
 private slots:
     void on_pushButtonLoadCalib_clicked();
