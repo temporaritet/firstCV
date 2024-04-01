@@ -6,282 +6,263 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>695</width>
-    <height>586</height>
+    <width>906</width>
+    <height>631</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>FirstCV</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <layout class="QGridLayout" name="gridLayout">
-    <item row="1" column="0">
-     <widget class="QComboBox" name="comboBoxImgLeft"/>
-    </item>
-    <item row="1" column="1">
-     <widget class="QComboBox" name="comboBoxImgRight"/>
-    </item>
-    <item row="1" column="2">
-     <widget class="QComboBox" name="comboBoxAlg"/>
-    </item>
-    <item row="1" column="3">
-     <widget class="QCheckBox" name="CheckBox_Calib">
-      <property name="text">
-       <string>Calibration</string>
-      </property>
-      <property name="checked">
-       <bool>false</bool>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="5">
-     <widget class="QPushButton" name="pushButtonLoadCalib">
-      <property name="text">
-       <string>Load Calib</string>
-      </property>
-     </widget>
-    </item>
-    <item row="1" column="6">
-     <widget class="QPushButton" name="pushButtonSaveCalib">
-      <property name="text">
-       <string>Save Calib</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="0">
-     <widget class="QLineEdit" name="lineEditLeft">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="3">
-     <widget class="QLabel" name="labelSADWindowSize">
-      <property name="text">
-       <string>SADWindowSize</string>
-      </property>
-     </widget>
-    </item>
-    <item row="2" column="4">
-     <widget class="QSlider" name="horizontalSlider_SADWindowSize">
-      <property name="minimum">
-       <number>1</number>
-      </property>
-      <property name="maximum">
-       <number>21</number>
-      </property>
-      <property name="singleStep">
-       <number>2</number>
-      </property>
-      <property name="value">
-       <number>3</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="0" rowspan="2">
-     <widget class="QLineEdit" name="lineEditRight">
-      <property name="text">
-       <string/>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="3">
-     <widget class="QLabel" name="labelNumberOfDisparities">
-      <property name="text">
-       <string>numberOfDisparities</string>
-      </property>
-     </widget>
-    </item>
-    <item row="3" column="4">
-     <widget class="QSlider" name="horizontalSlider_numberOfDisparities">
-      <property name="minimum">
-       <number>16</number>
-      </property>
-      <property name="maximum">
-       <number>128</number>
-      </property>
-      <property name="singleStep">
-       <number>16</number>
-      </property>
-      <property name="pageStep">
-       <number>16</number>
-      </property>
-      <property name="value">
-       <number>32</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="3">
-     <widget class="QLabel" name="labelPreFilterCap">
-      <property name="text">
-       <string>preFilterCap</string>
-      </property>
-     </widget>
-    </item>
-    <item row="4" column="4">
-     <widget class="QSlider" name="horizontalSlider_preFilterCap">
-      <property name="value">
-       <number>63</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="2" rowspan="2">
-     <widget class="QPushButton" name="pushButtonLoadFiles">
-      <property name="text">
-       <string>Load</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="3">
-     <widget class="QLabel" name="labelMinDisparity">
-      <property name="text">
-       <string>minDisparity</string>
-      </property>
-     </widget>
-    </item>
-    <item row="5" column="4">
-     <widget class="QSlider" name="horizontalSlider_minDIsparity">
-      <property name="minimum">
-       <number>-64</number>
-      </property>
-      <property name="maximum">
-       <number>128</number>
-      </property>
-      <property name="value">
-       <number>0</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="0">
-     <widget class="QPushButton" name="pushButtonStartStop">
-      <property name="text">
-       <string>Start</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="3">
-     <widget class="QLabel" name="labelUniquenessRatio">
-      <property name="text">
-       <string>uniquenessRatio</string>
-      </property>
-     </widget>
-    </item>
-    <item row="6" column="4">
-     <widget class="QSlider" name="horizontalSlider_uniquenessRatio">
-      <property name="value">
-       <number>16</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="3">
-     <widget class="QLabel" name="labelSpeckleWindowSize">
-      <property name="text">
-       <string>speckleWindowSize</string>
-      </property>
-     </widget>
-    </item>
-    <item row="7" column="4">
-     <widget class="QSlider" name="horizontalSlider_speckleWindowSize">
-      <property name="value">
-       <number>50</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="3">
-     <widget class="QLabel" name="labelSpeckleRange">
-      <property name="text">
-       <string>speckleRange</string>
-      </property>
-     </widget>
-    </item>
-    <item row="8" column="4">
-     <widget class="QSlider" name="horizontalSlider_speckleRange">
-      <property name="value">
-       <number>10</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="2" rowspan="2">
-     <widget class="QPushButton" name="pushButton">
-      <property name="text">
-       <string>Save Disp</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="3">
-     <widget class="QLabel" name="labelDisp12MaxDiff">
-      <property name="text">
-       <string>disp12MaxDiff</string>
-      </property>
-     </widget>
-    </item>
-    <item row="9" column="4">
-     <widget class="QSlider" name="horizontalSlider_disp12MaxDiff">
-      <property name="value">
-       <number>10</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="3">
-     <widget class="QLabel" name="labelFullDP">
-      <property name="text">
-       <string>fullDP</string>
-      </property>
-     </widget>
-    </item>
-    <item row="10" column="4">
-     <widget class="QSlider" name="horizontalSlider_fullDP">
-      <property name="maximum">
-       <number>2</number>
-      </property>
-      <property name="value">
-       <number>2</number>
-      </property>
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-     </widget>
-    </item>
-    <item row="0" column="0" colspan="7">
-     <widget class="QSplitter" name="splitter">
-      <property name="orientation">
-       <enum>Qt::Horizontal</enum>
-      </property>
-      <widget class="QLabel" name="label_Im0">
-       <property name="text">
-        <string>|0                                                                      320|</string>
-       </property>
-      </widget>
-      <widget class="QLabel" name="label_Im1">
-       <property name="text">
-        <string>|0                                                                      320|</string>
-       </property>
-      </widget>
-     </widget>
+   <layout class="QGridLayout" name="gridLayout_4">
+    <item row="0" column="0">
+     <layout class="QGridLayout" name="gridLayout_3">
+      <item row="0" column="0">
+       <widget class="QSplitter" name="splitter">
+        <property name="orientation">
+         <enum>Qt::Horizontal</enum>
+        </property>
+        <widget class="QLabel" name="label_Im0">
+         <property name="text">
+          <string>|0                                                                      320|</string>
+         </property>
+        </widget>
+        <widget class="QLabel" name="label_Im1">
+         <property name="text">
+          <string>|0                                                                      320|</string>
+         </property>
+        </widget>
+       </widget>
+      </item>
+      <item row="1" column="0">
+       <layout class="QHBoxLayout" name="horizontalLayout">
+        <item>
+         <layout class="QGridLayout" name="gridLayout_2">
+          <item row="1" column="0">
+           <widget class="QLineEdit" name="lineEditLeft">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLineEdit" name="lineEditRight">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QComboBox" name="comboBoxImgRight"/>
+          </item>
+          <item row="2" column="3">
+           <widget class="QComboBox" name="comboBoxImgLeft"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QComboBox" name="comboBoxAlg"/>
+          </item>
+          <item row="0" column="3">
+           <widget class="QCheckBox" name="CheckBox_Calib">
+            <property name="text">
+             <string>Calibration</string>
+            </property>
+            <property name="checked">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="gridLayout">
+          <item row="0" column="0">
+           <widget class="QLabel" name="labelSADWindowSize">
+            <property name="text">
+             <string>SADWindowSize</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QSlider" name="horizontalSlider_SADWindowSize">
+            <property name="minimum">
+             <number>1</number>
+            </property>
+            <property name="maximum">
+             <number>21</number>
+            </property>
+            <property name="singleStep">
+             <number>2</number>
+            </property>
+            <property name="value">
+             <number>3</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="labelNumberOfDisparities">
+            <property name="text">
+             <string>numberOfDisparities</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QSlider" name="horizontalSlider_numberOfDisparities">
+            <property name="minimum">
+             <number>16</number>
+            </property>
+            <property name="maximum">
+             <number>128</number>
+            </property>
+            <property name="singleStep">
+             <number>16</number>
+            </property>
+            <property name="pageStep">
+             <number>16</number>
+            </property>
+            <property name="value">
+             <number>32</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="labelPreFilterCap">
+            <property name="text">
+             <string>preFilterCap</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QSlider" name="horizontalSlider_preFilterCap">
+            <property name="value">
+             <number>63</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="labelMinDisparity">
+            <property name="text">
+             <string>minDisparity</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QSlider" name="horizontalSlider_minDIsparity">
+            <property name="minimum">
+             <number>-64</number>
+            </property>
+            <property name="maximum">
+             <number>128</number>
+            </property>
+            <property name="value">
+             <number>0</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelUniquenessRatio">
+            <property name="text">
+             <string>uniquenessRatio</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QSlider" name="horizontalSlider_uniquenessRatio">
+            <property name="value">
+             <number>16</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelSpeckleWindowSize">
+            <property name="text">
+             <string>speckleWindowSize</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QSlider" name="horizontalSlider_speckleWindowSize">
+            <property name="value">
+             <number>50</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="labelSpeckleRange">
+            <property name="text">
+             <string>speckleRange</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QSlider" name="horizontalSlider_speckleRange">
+            <property name="value">
+             <number>10</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="labelDisp12MaxDiff">
+            <property name="text">
+             <string>disp12MaxDiff</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QSlider" name="horizontalSlider_disp12MaxDiff">
+            <property name="value">
+             <number>10</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="labelFullDP">
+            <property name="text">
+             <string>fullDP</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="1">
+           <widget class="QSlider" name="horizontalSlider_fullDP">
+            <property name="maximum">
+             <number>2</number>
+            </property>
+            <property name="value">
+             <number>2</number>
+            </property>
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+       </layout>
+      </item>
+     </layout>
     </item>
    </layout>
   </widget>
@@ -290,10 +271,30 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>695</width>
+     <width>906</width>
      <height>27</height>
     </rect>
    </property>
+   <widget class="QMenu" name="menuFile">
+    <property name="title">
+     <string>File</string>
+    </property>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave_Disparity"/>
+    <addaction name="actionLoad_Calibration"/>
+    <addaction name="actionSaveCalibration"/>
+    <addaction name="actionExit"/>
+   </widget>
+   <widget class="QMenu" name="menuTools">
+    <property name="title">
+     <string>Tools</string>
+    </property>
+    <addaction name="actionExtrisinc_calibration"/>
+    <addaction name="actionIntrisinc_calibration"/>
+    <addaction name="actionStart_Process"/>
+   </widget>
+   <addaction name="menuFile"/>
+   <addaction name="menuTools"/>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -302,10 +303,91 @@
    <attribute name="toolBarBreak">
     <bool>false</bool>
    </attribute>
+   <addaction name="actionOpen"/>
+   <addaction name="actionSave_Disparity"/>
+   <addaction name="actionLoad_Calibration"/>
+   <addaction name="actionSaveCalibration"/>
+   <addaction name="actionStart_Process"/>
+   <addaction name="actionExtrisinc_calibration"/>
+   <addaction name="actionIntrisinc_calibration"/>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/resource/open_img.png</normaloff>:/icon/resource/open_img.png</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave_Disparity">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/resource/save_disp.png</normaloff>:/icon/resource/save_disp.png</iconset>
+   </property>
+   <property name="text">
+    <string>Save Disparity</string>
+   </property>
+  </action>
+  <action name="actionLoad_Calibration">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/resource/open_calib.png</normaloff>:/icon/resource/open_calib.png</iconset>
+   </property>
+   <property name="text">
+    <string>Load Calibration</string>
+   </property>
+  </action>
+  <action name="actionSaveCalibration">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/resource/save_calib.png</normaloff>:/icon/resource/save_calib.png</iconset>
+   </property>
+   <property name="text">
+    <string>SaveCalibration</string>
+   </property>
+  </action>
+  <action name="actionExit">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/resource/close.png</normaloff>:/icon/resource/close.png</iconset>
+   </property>
+   <property name="text">
+    <string>Exit</string>
+   </property>
+  </action>
+  <action name="actionExtrisinc_calibration">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/resource/calibrate.png</normaloff>:/icon/resource/calibrate.png</iconset>
+   </property>
+   <property name="text">
+    <string>Extrisinc calibration</string>
+   </property>
+  </action>
+  <action name="actionIntrisinc_calibration">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/resource/intr_calib.png</normaloff>:/icon/resource/intr_calib.png</iconset>
+   </property>
+   <property name="text">
+    <string>Intrisinc calibration</string>
+   </property>
+  </action>
+  <action name="actionStart_Process">
+   <property name="icon">
+    <iconset resource="resource.qrc">
+     <normaloff>:/icon/resource/start-button.png</normaloff>:/icon/resource/start-button.png</iconset>
+   </property>
+   <property name="text">
+    <string>Start Process</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources/>
+ <resources>
+  <include location="resource.qrc"/>
+ </resources>
  <connections/>
 </ui>

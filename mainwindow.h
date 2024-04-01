@@ -37,21 +37,22 @@ public slots:
     void ImageShow(Mat imgOrigin, Mat ImgDisparity);
 
 private slots:
-    void on_pushButtonLoadCalib_clicked();
-
-    void on_pushButtonSaveCalib_clicked();
-
-    void on_pushButtonLoadFiles_clicked();
-
     void on_comboBoxImgLeft_currentIndexChanged(const QString &arg1);
 
     void on_comboBoxImgRight_currentIndexChanged(const QString &arg1);
 
-    void on_pushButtonStartStop_clicked();
+    void on_actionOpen_triggered();
 
-    void on_pushButton_clicked();
+    void on_actionSave_Disparity_triggered();
+
+    void on_actionLoad_Calibration_triggered();
+
+    void on_actionSaveCalibration_triggered();
+
+    void on_actionStart_Process_triggered();
 
 private:
+    bool flagStart = false;
     Ui::MainWindow *ui;
 };
 

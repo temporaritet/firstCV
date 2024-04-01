@@ -82,6 +82,7 @@ void Server::run()
 
 void Server::thClose()
 {
+    shutdown(serverfd, SHUT_RD);
     close(newsockfd);
     close(serverfd);
     threadClose = true;

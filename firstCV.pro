@@ -47,3 +47,6 @@ LIBS += `pkg-config --libs opencv`
 #        -lopencv_contrib\
 #        -lopencv_legacy\
 #        -lopencv_flann\
+
+RESOURCES += \
+    resource.qrc

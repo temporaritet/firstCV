@@ -1,0 +1,13 @@
+<RCC>
+    <qresource prefix="/icon">
+        <file>resource/calibrate.png</file>
+        <file>resource/close.png</file>
+        <file>resource/open_calib.png</file>
+        <file>resource/open_img.png</file>
+        <file>resource/save_calib.png</file>
+        <file>resource/save_disp.png</file>
+        <file>resource/intr_calib.png</file>
+        <file>resource/stop.png</file>
+        <file>resource/start-button.png</file>
+    </qresource>
+</RCC>

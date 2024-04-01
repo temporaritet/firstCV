@@ -233,14 +233,17 @@ void MainWindow::GetImg()
 
         if(ui->CheckBox_Calib->isChecked())
         {
+            //Extrisinc camera calibration
             calibrationCalc();
         }
         else
         {
+            //Disparity process
             cvtColor(cam0.matIm, matRotated0, COLOR_BGR2GRAY);
             cvtColor(cam1.matIm, matRotated1, COLOR_BGR2GRAY);
             matRotated0.copyTo(matProc);            
 
+            //Apply calibration
             Mat M0 = getPerspectiveTransform(src1, src0);
             warpPerspective(matRotated1, matRotated1, M0, matRotated1.size(),INTER_LINEAR, BORDER_CONSTANT,0);
 
@@ -263,11 +266,9 @@ void MainWindow::GetImg()
                 SADCalc();
             }
 
-            memcpy(server.bufferTx, matProc.data, 320*240);
+            memcpy(server.bufferTx, matProc.data, I_W*I_H);
             //server.bufferTx = matProc.data;
             server.dataInBuffer = 1;
-
-
         }
 
         cam0.isReady = false;
@@ -275,21 +276,21 @@ void MainWindow::GetImg()
     }
 }
 
-void MainWindow::on_pushButtonLoadCalib_clicked()
+void MainWindow::on_comboBoxImgLeft_currentIndexChanged(const QString &arg1)
 {
-    loadCalib();
+    selectOption(&cam0, ui->comboBoxImgLeft->currentText());
 }
 
-void MainWindow::on_pushButtonSaveCalib_clicked()
+void MainWindow::on_comboBoxImgRight_currentIndexChanged(const QString &arg1)
 {
-    saveCalib();
+    selectOption(&cam1, ui->comboBoxImgRight->currentText());
 }
 
-void MainWindow::on_pushButtonLoadFiles_clicked()
-{
 
+void MainWindow::on_actionOpen_triggered()
+{
     tmrTimer->stop();
-    ui->pushButtonStartStop->setText("Start");
+    //ui->pushButtonStartStop->setText("Start");
 
     path = dir.relativeFilePath("images/");
     QString fn = QFileDialog::getOpenFileName(this, tr("Open image"), path, tr("Image Files(*.png *.jpg *.bmp)"));
@@ -303,38 +304,13 @@ void MainWindow::on_pushButtonLoadFiles_clicked()
     ui->lineEditRight->setText(cam1.streamSrc);
     cam1.fLoad = true;
     tmrTimer->start(200);
-    ui->pushButtonStartStop->setText("Stop");
+    //ui->pushButtonStartStop->setText("Stop");
 }
 
-void MainWindow::on_comboBoxImgLeft_currentIndexChanged(const QString &arg1)
-{
-    selectOption(&cam0, ui->comboBoxImgLeft->currentText());
-}
-
-void MainWindow::on_comboBoxImgRight_currentIndexChanged(const QString &arg1)
-{
-    selectOption(&cam1, ui->comboBoxImgRight->currentText());
-}
-
-void MainWindow::on_pushButtonStartStop_clicked()
-{
-    if(ui->pushButtonStartStop->text() == "Start")
-    {
-        tmrTimer->start(200);
-        ui->pushButtonStartStop->setText("Stop");
-    }
-    else if(ui->pushButtonStartStop->text() == "Stop")
-    {
-        tmrTimer->stop();
-        ui->pushButtonStartStop->setText("Start");
-    }
-    else{}
-}
-
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_actionSave_Disparity_triggered()
 {
     tmrTimer->stop();
-    ui->pushButtonStartStop->setText("Start");
+    //ui->pushButtonStartStop->setText("Start");
 
     path = dir.relativeFilePath("images/");
 
@@ -343,5 +319,32 @@ void MainWindow::on_pushButton_clicked()
     imwrite(fn.toStdString(), matProc);
 
     tmrTimer->start(200);
-    ui->pushButtonStartStop->setText("Stop");
+    //ui->pushButtonStartStop->setText("Stop");
+}
+
+void MainWindow::on_actionLoad_Calibration_triggered()
+{
+    loadCalib();
+}
+
+void MainWindow::on_actionSaveCalibration_triggered()
+{
+    saveCalib();
+}
+
+void MainWindow::on_actionStart_Process_triggered()
+{
+    if(flagStart == true)
+    {
+        flagStart = false;
+        tmrTimer->start(200);
+        ui->actionStart_Process->setIcon(QIcon(":/icon/resource/stop.png"));
+    }
+    else
+    {
+        flagStart = true;
+        tmrTimer->stop();
+        ui->actionStart_Process->setIcon(QIcon(":/icon/resource/start-button.png"));
+    }
+
 }
